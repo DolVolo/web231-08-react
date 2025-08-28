@@ -1165,9 +1165,9 @@ function GPACalculator() {
 }
 
 function App() {
-  const [name, setName] = useState('CSMJU')
+  const name = 'CSMJU'
   //message
-  const [message, setMessage] = useState('สอบเสร็จแล้วสบายใจจัง')
+  const message = 'สอบเสร็จแล้วสบายใจจัง'
   const [count, setCount] = useState(0)
   const [fontSize, setFontSize] = useState(32) // เริ่มต้นที่ 32px
   const status = false; // true = เขียว, false = แดง 
