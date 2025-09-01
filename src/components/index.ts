@@ -18,3 +18,4 @@ export { default as PropsAssignmentSection } from './PropsAssignmentSection';
 export { default as ConditionalRenderingSection } from './ConditionalRenderingSection';
 export { default as RenderingListsSection } from './RenderingListsSection';
 export { default as GPAAssignmentSection } from './GPAAssignmentSection';
+export { default as LearningReactChallenges } from './LearningReactChallenges';

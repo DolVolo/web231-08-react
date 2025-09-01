@@ -2,36 +2,23 @@ import './App.css'
 
 // Import all components from separate files
 import {
-  WelcomeBanner,
-  StudentInfo,
   OriginalCounter,
-  ComponentExamplesSection,
   PropsAssignmentSection,
   ConditionalRenderingSection,
   RenderingListsSection,
-  GPAAssignmentSection
+  GPAAssignmentSection,
+  LearningReactChallenges
 } from './components'
 
 function App() {
   return (
     <>
-      {/* เพิ่ม Components Assignment */}
-      <WelcomeBanner 
-        title="🎯 React Components Assignment" 
-        subtitle="Assignment 2.1: Learning React Components with Reusable Code"
-      />
-      
-      <StudentInfo 
-        studentName="[Your Name Here]" 
-        studentId="[Your Student ID]"
-      />
+      {/* Assignment 2.1: Learning React Challenges */}
+      <LearningReactChallenges />
 
       {/* Original Counter Component */}
       <OriginalCounter />
       
-      {/* Component Examples Section */}
-      <ComponentExamplesSection />
-
       {/* Assignment 2.2: Props Section */}
       <PropsAssignmentSection />
 

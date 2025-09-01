@@ -1,29 +1,177 @@
-import { useState } from 'react';
-import StatusBadge from './StatusBadge';
-import WeatherWidget from './WeatherWidget';
-import LoginStatus from './LoginStatus';
-import NotificationList from './NotificationList';
+// Item component with packed status
+function Item({ name, isPacked }: { name: string; isPacked: boolean }) {
+  return (
+    <li style={{
+      padding: '8px 0',
+      fontSize: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      color: '#2c3e50'
+    }}>
+      <span>{name}</span>
+      <span style={{ fontSize: '18px' }}>
+        {isPacked ? '✅' : '❌'}
+      </span>
+    </li>
+  );
+}
+
+function PackingListBasic() {
+  return (
+    <section style={{
+      backgroundColor: 'white',
+      padding: '20px',
+      borderRadius: '10px',
+      border: '2px solid #007bff',
+      margin: '20px',
+      maxWidth: '400px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h1 style={{ color: '#2c3e50', marginBottom: '15px', fontSize: '20px' }}>
+        🚀 Sally Ride's Packing List
+      </h1>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        <Item 
+          isPacked={true} 
+          name="Space suit" 
+        />
+        <Item 
+          isPacked={true} 
+          name="Helmet with a golden leaf" 
+        />
+        <Item 
+          isPacked={false} 
+          name="Photo of Tam" 
+        />
+      </ul>
+    </section>
+  );
+}
+
+// Item component with importance level
+function ImportantItem({ name, importance }: { name: string; importance: number }) {
+  return (
+    <li style={{
+      padding: '8px 0',
+      fontSize: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
+      color: '#2c3e50'
+    }}>
+      <span>{name}</span>
+      {importance > 0 && ' '}
+      {importance > 0 && (
+        <i style={{ color: '#dc3545', fontSize: '14px' }}>
+          (Importance: {importance})
+        </i>
+      )}
+    </li>
+  );
+}
+
+function PackingListWithImportance() {
+  return (
+    <section style={{
+      backgroundColor: 'white',
+      padding: '20px',
+      borderRadius: '10px',
+      border: '2px solid #28a745',
+      margin: '20px',
+      maxWidth: '400px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h1 style={{ color: '#2c3e50', marginBottom: '15px', fontSize: '20px' }}>
+        📊 Sally Ride's Priority List
+      </h1>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ImportantItem 
+          importance={9} 
+          name="Space suit" 
+        />
+        <ImportantItem 
+          importance={0} 
+          name="Helmet with a golden leaf" 
+        />
+        <ImportantItem 
+          importance={6} 
+          name="Photo of Tam" 
+        />
+      </ul>
+    </section>
+  );
+}
+
+// Drink component with conditional content
+function Drink({ name }: { name: string }) {
+  return (
+    <section style={{
+      backgroundColor: 'white',
+      padding: '20px',
+      borderRadius: '10px',
+      border: '2px solid #6f42c1',
+      margin: '20px',
+      maxWidth: '350px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h1 style={{ 
+        color: '#2c3e50', 
+        marginBottom: '15px', 
+        fontSize: '24px',
+        textTransform: 'capitalize'
+      }}>
+        {name === 'tea' ? '🍵' : '☕'} {name}
+      </h1>
+      <dl style={{ margin: 0 }}>
+        <dt style={{ fontWeight: 'bold', color: '#495057', marginTop: '10px' }}>
+          Part of plant
+        </dt>
+        <dd style={{ margin: '5px 0 10px 20px', color: '#666' }}>
+          {name === 'tea' ? 'leaf' : 'bean'}
+        </dd>
+        <dt style={{ fontWeight: 'bold', color: '#495057', marginTop: '10px' }}>
+          Caffeine content
+        </dt>
+        <dd style={{ margin: '5px 0 10px 20px', color: '#666' }}>
+          {name === 'tea' ? '15–70 mg/cup' : '80–185 mg/cup'}
+        </dd>
+        <dt style={{ fontWeight: 'bold', color: '#495057', marginTop: '10px' }}>
+          Age
+        </dt>
+        <dd style={{ margin: '5px 0 10px 20px', color: '#666' }}>
+          {name === 'tea' ? '4,000+ years' : '1,000+ years'}
+        </dd>
+      </dl>
+    </section>
+  );
+}
+
+function DrinkList() {
+  return (
+    <div style={{ margin: '30px 0' }}>
+      <h3 style={{ 
+        textAlign: 'center', 
+        color: '#2c3e50',
+        marginBottom: '20px',
+        fontSize: '20px'
+      }}>
+        ☕ Beverage Information
+      </h3>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        gap: '20px'
+      }}>
+        <Drink name="tea" />
+        <Drink name="coffee" />
+      </div>
+    </div>
+  );
+}
 
 export default function ConditionalRenderingSection() {
-  const [isUserActive, setIsUserActive] = useState(true);
-  const [currentUser, setCurrentUser] = useState<{ name: string; role: string } | null>({
-    name: "John Doe",
-    role: "admin"
-  });
-
-  const weatherData = [
-    { temperature: 32, condition: 'sunny' as const },
-    { temperature: 18, condition: 'rainy' as const },
-    { temperature: 5, condition: 'snowy' as const },
-    { temperature: 22, condition: 'cloudy' as const }
-  ];
-
-  const notifications = [
-    { id: 1, message: "Your profile has been updated successfully", type: 'info' as const },
-    { id: 2, message: "Warning: Your subscription expires in 3 days", type: 'warning' as const },
-    { id: 3, message: "Error: Failed to save your changes", type: 'error' as const }
-  ];
-
   return (
     <div style={{ margin: '40px 0' }}>
       <h2 style={{ 
@@ -39,111 +187,27 @@ export default function ConditionalRenderingSection() {
         🔀 Assignment 2.3: Conditional Rendering
       </h2>
       
-      <div style={{ marginBottom: '30px' }}>
+      <div style={{ margin: '30px 0' }}>
         <h3 style={{ 
-          color: '#000000', 
           textAlign: 'center', 
+          color: '#2c3e50',
           marginBottom: '20px',
-          backgroundColor: '#fff3cd',
-          padding: '12px',
-          borderRadius: '8px',
-          border: '2px solid #ffc107',
-          fontSize: '20px',
-          fontWeight: 'bold'
+          fontSize: '20px'
         }}>
-          🎛️ Status & Controls
+          📦 Packing Lists with Different Conditions
         </h3>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          alignItems: 'center', 
-          gap: '20px',
-          flexWrap: 'wrap'
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          gap: '20px'
         }}>
-          <StatusBadge isActive={isUserActive} />
-          <button 
-            onClick={() => setIsUserActive(!isUserActive)}
-            style={{
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
-          >
-            Toggle Status
-          </button>
-          <button 
-            onClick={() => setCurrentUser(currentUser ? null : { name: "John Doe", role: "admin" })}
-            style={{
-              backgroundColor: '#6c757d',
-              color: 'white',
-              border: 'none',
-              padding: '10px 20px',
-              borderRadius: '5px',
-              cursor: 'pointer'
-            }}
-          >
-            Toggle Login
-          </button>
+          <PackingListBasic />
+          <PackingListWithImportance />
         </div>
       </div>
 
-      <div style={{ marginBottom: '30px' }}>
-        <h3 style={{ 
-          color: '#000000', 
-          textAlign: 'center', 
-          marginBottom: '20px',
-          backgroundColor: '#d1ecf1',
-          padding: '12px',
-          borderRadius: '8px',
-          border: '2px solid #17a2b8',
-          fontSize: '20px',
-          fontWeight: 'bold'
-        }}>
-          🌤️ Weather Conditions
-        </h3>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          flexWrap: 'wrap', 
-          gap: '15px' 
-        }}>
-          {weatherData.map((weather, index) => (
-            <WeatherWidget 
-              key={index}
-              temperature={weather.temperature}
-              condition={weather.condition}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div style={{ marginBottom: '30px' }}>
-        <h3 style={{ 
-          color: '#000000', 
-          textAlign: 'center', 
-          marginBottom: '20px',
-          backgroundColor: '#f8d7da',
-          padding: '12px',
-          borderRadius: '8px',
-          border: '2px solid #dc3545',
-          fontSize: '20px',
-          fontWeight: 'bold'
-        }}>
-          🔐 User Authentication & Notifications
-        </h3>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
-          flexWrap: 'wrap', 
-          gap: '20px' 
-        }}>
-          <LoginStatus user={currentUser} />
-          <NotificationList notifications={notifications} />
-        </div>
-      </div>
+      <DrinkList />
     </div>
   );
 }
