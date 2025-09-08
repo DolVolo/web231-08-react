@@ -9,10 +9,14 @@ import {
   GPAAssignmentSection,
   LearningReactChallenges
 } from './components'
+import ParliamentDirectory from './ParliamentDirectory'
 
 function App() {
   return (
     <>
+  {/* Assignment: Parliament Directory (React Hook Form + Zod + Tailwind) */}
+  <ParliamentDirectory />
+
       {/* Assignment 2.1: Learning React Challenges */}
       <LearningReactChallenges />
 
